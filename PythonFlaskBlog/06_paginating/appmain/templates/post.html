@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+<div>
+    <p>{{post.title}}</p>
+    <p>{{post.content}}</p>
+    <p>{{post.date_posted}}</p>
+    <!-- 로그인한 사용자가 글의 저자와 같다면 수정 링크를 보여준다. -->
+    {%if current_user.is_authenticated%}
+        {%if current_user.username == post.author%}
+            <div>
+                <a href="/post/{{post.id}}/update">Update Post</a>
+
+                <!-- 삭제하기 링크 추가 -->
+                <a href="/post/{{post.id}}/delete">Delete Post</a>
+                <!-- -->
+            </div>
+        {%endif%}
+    {%endif%}
+</div>
+{% endblock content %}

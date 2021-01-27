@@ -1,0 +1,21 @@
+{%extends "layout.html"%}
+{%block content%}
+    <!--    paginate() 반환값은 paginate 객체입니다. 따라서 for 구문에 쓰일 수 없습니다   -->
+    {#% for post in posts %#}
+    <!--    paginate.items list를 이용합니다.    -->
+    {% for post in posts.items %}
+        <h2><a href="/post/{{post.id}}">{{post.title}}</a></h2>
+        <p>By {{post.author}} on {{post.datePosted}}</p>
+        <p>{{post.content}}</p>
+    {% endfor%}
+
+    <!--	페이지 이동을 위한 페이지 번호 링크구현	-->
+    <!--    paginate.iter_pages()는 전달한 인자를 참조해서 페이지 번호를 반환합니다.  -->
+    {% for pageNum in posts.iter_pages(left_edge = 1, right_edge = 1, left_current = 1, right_current = 2) %}
+        {% if pageNum %}
+            <a href="{{url_for('main.home', page = pageNum)}}">{{pageNum}}</a>
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor%}
+{%endblock content%}
