@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+<form method="POST" action="">
+    {{form.hidden_tag()}} {# Transferring CSRF token = secret key #}
+    <div>
+        <p>{{post.title}}</p>
+        <p>{{post.content}}</p>
+        <p>{{post.date_posted}}</p>
+        <!-- 로그인한 사용자가 글의 저자와 같다면 삭제 확인 버튼을 보여준다. -->
+        {%if current_user.is_authenticated%}
+        {%if current_user.username == post.author%}
+        <div>
+            <p>Confirm deletion?</p>
+            {{form.submit()}}
+        </div>
+        {%endif%}
+        {%endif%}
+    </div>
+</form>
+{% endblock content %}
