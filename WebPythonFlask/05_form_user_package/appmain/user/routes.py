@@ -21,6 +21,6 @@ def login():
             return redirect(url_for('main.home'))
         else:
             print('Login unsuccessful. Please check username and passoword')
-            return render_template('books.html', title='Login', form=form)
+            return render_template('login.html', title='Login', form=form)
     else:
-        return render_template('books.html', title = 'Login', form = form)
+        return render_template('login.html', title = 'Login', form = form)
